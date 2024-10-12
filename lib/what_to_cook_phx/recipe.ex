@@ -13,6 +13,7 @@ defmodule WhatToCookPhx.Recipe do
     field :recipe_yield, :string
 
     has_many :instructions, WhatToCookPhx.Instruction
+    has_many :ingredients, WhatToCookPhx.Ingredient
 
     timestamps(type: :utc_datetime)
   end
@@ -41,5 +42,6 @@ defmodule WhatToCookPhx.Recipe do
       :recipe_yield
     ])
     |> cast_assoc(:instructions, with: &WhatToCookPhx.Instruction.changeset/2)
+    |> cast_assoc(:ingredients, with: &WhatToCookPhx.Ingredient.changeset/2)
   end
 end
