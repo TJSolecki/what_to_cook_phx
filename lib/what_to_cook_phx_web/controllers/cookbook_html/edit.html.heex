@@ -1,0 +1,8 @@
+<.header>
+  Edit Cookbook <%= @cookbook.id %>
+  <:subtitle>Use this form to manage cookbook records in your database.</:subtitle>
+</.header>
+
+<.cookbook_form changeset={@changeset} action={~p"/cookbooks/#{@cookbook}"} />
+
+<.back navigate={~p"/cookbooks"}>Back to cookbooks</.back>

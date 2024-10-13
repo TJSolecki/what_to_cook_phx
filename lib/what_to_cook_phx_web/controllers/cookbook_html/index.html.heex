@@ -1,0 +1,24 @@
+<.header>
+  Listing Cookbooks
+  <:actions>
+    <.link href={~p"/cookbooks/new"}>
+      <.button>New Cookbook</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table id="cookbooks" rows={@cookbooks} row_click={&JS.navigate(~p"/cookbooks/#{&1}")}>
+  <:col :let={cookbook} label="Name"><%= cookbook.name %></:col>
+  <:col :let={cookbook} label="Recipe count"><%= cookbook.recipe_count %></:col>
+  <:action :let={cookbook}>
+    <div class="sr-only">
+      <.link navigate={~p"/cookbooks/#{cookbook}"}>Show</.link>
+    </div>
+    <.link navigate={~p"/cookbooks/#{cookbook}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={cookbook}>
+    <.link href={~p"/cookbooks/#{cookbook}"} method="delete" data-confirm="Are you sure?">
+      Delete
+    </.link>
+  </:action>
+</.table>

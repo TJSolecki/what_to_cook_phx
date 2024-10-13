@@ -15,6 +15,8 @@ defmodule WhatToCookPhx.Recipe do
     has_many :instructions, WhatToCookPhx.Instruction
     has_many :ingredients, WhatToCookPhx.Ingredient
 
+    belongs_to :owner, WhatToCookPhx.Accounts.User
+
     timestamps(type: :utc_datetime)
   end
 

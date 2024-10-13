@@ -64,6 +64,8 @@ defmodule WhatToCookPhxWeb.Router do
   scope "/", WhatToCookPhxWeb do
     pipe_through [:browser, :require_authenticated_user]
 
+    resources "/cookbooks", CookbookController
+
     live_session :require_authenticated_user,
       on_mount: [{WhatToCookPhxWeb.UserAuth, :ensure_authenticated}] do
       live "/users/settings", UserSettingsLive, :edit
