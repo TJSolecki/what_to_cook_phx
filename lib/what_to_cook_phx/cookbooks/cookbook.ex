@@ -13,7 +13,7 @@ defmodule WhatToCookPhx.Cookbooks.Cookbook do
   @doc false
   def changeset(cookbook, attrs) do
     cookbook
-    |> cast(attrs, [:name, :recipe_count])
-    |> validate_required([:name, :recipe_count])
+    |> cast(attrs, [:name, :recipe_count, :owner_id])
+    |> validate_required([:name, :recipe_count, :owner_id])
   end
 end

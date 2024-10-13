@@ -3,19 +3,27 @@ defmodule WhatToCookPhxWeb.CookbookController do
 
   alias WhatToCookPhx.Cookbooks
   alias WhatToCookPhx.Cookbooks.Cookbook
+  require Logger
 
   def index(conn, _params) do
-    cookbooks = Cookbooks.list_cookbooks()
+    user_id = conn.assigns.current_user.id
+
+    cookbooks = Cookbooks.list_user_cookbooks(user_id)
+    Logger.info("cookbooks for user #{user_id}: #{inspect(cookbooks)}")
     render(conn, :index, cookbooks: cookbooks)
   end
 
   def new(conn, _params) do
-    changeset = Cookbooks.change_cookbook(%Cookbook{})
+    user_id = conn.assigns.current_user.id
+
+    changeset = Cookbooks.change_cookbook(%Cookbook{owner_id: user_id, recipe_count: 0})
     render(conn, :new, changeset: changeset)
   end
 
-  def create(conn, %{"cookbook" => cookbook_params}) do
-    case Cookbooks.create_cookbook(cookbook_params) do
+  def create(conn, %{"cookbook" => %{"name" => name}}) do
+    user_id = conn.assigns.current_user.id
+
+    case Cookbooks.create_cookbook(%{owner_id: user_id, recipe_count: 0, name: name}) do
       {:ok, cookbook} ->
         conn
         |> put_flash(:info, "Cookbook created successfully.")

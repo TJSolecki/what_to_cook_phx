@@ -9,16 +9,17 @@ defmodule WhatToCookPhx.Cookbooks do
   alias WhatToCookPhx.Cookbooks.Cookbook
 
   @doc """
-  Returns the list of cookbooks.
+  Returns the list of cookbooks belonging to the specified user.
 
   ## Examples
 
-      iex> list_cookbooks()
+      iex> list_cookbooks(1)
       [%Cookbook{}, ...]
 
   """
-  def list_cookbooks do
-    Repo.all(Cookbook)
+  def list_user_cookbooks(user_id) do
+    from(c in Cookbook, where: c.owner_id == ^user_id)
+    |> Repo.all()
   end
 
   @doc """
