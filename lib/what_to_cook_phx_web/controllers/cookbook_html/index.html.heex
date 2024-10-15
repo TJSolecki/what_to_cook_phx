@@ -1,5 +1,5 @@
 <.header>
-  Listing Cookbooks
+  Your Cookbooks
   <:actions>
     <.link href={~p"/cookbooks/new"}>
       <.button>New Cookbook</.button>
@@ -7,18 +7,15 @@
   </:actions>
 </.header>
 
-<.table id="cookbooks" rows={@cookbooks} row_click={&JS.navigate(~p"/cookbooks/#{&1}")}>
-  <:col :let={cookbook} label="Name"><%= cookbook.name %></:col>
-  <:col :let={cookbook} label="Recipe count"><%= cookbook.recipe_count %></:col>
-  <:action :let={cookbook}>
-    <div class="sr-only">
-      <.link navigate={~p"/cookbooks/#{cookbook}"}>Show</.link>
+<ul class="grid grid-cols-3 gap-4">
+  <li :for={cookbook <- @cookbooks} class="rounded-md border p-4 flex flex-col gap-4 justify-between">
+    <span class="text-lg font-bold">
+      <%= cookbook.name %>
+    </span>
+    <div class="self-end bg-orange-500 rounded-full px-2">
+      <span class="text-white font-bold p-1 text-sm">
+        <%= cookbook.recipe_count %> recipes
+      </span>
     </div>
-    <.link navigate={~p"/cookbooks/#{cookbook}/edit"}>Edit</.link>
-  </:action>
-  <:action :let={cookbook}>
-    <.link href={~p"/cookbooks/#{cookbook}"} method="delete" data-confirm="Are you sure?">
-      Delete
-    </.link>
-  </:action>
-</.table>
+  </li>
+</ul>

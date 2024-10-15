@@ -1,16 +1,20 @@
 <.header>
   Cookbook <%= @cookbook.id %>
-  <:subtitle>This is a cookbook record from your database.</:subtitle>
-  <:actions>
-    <.link href={~p"/cookbooks/#{@cookbook}/edit"}>
-      <.button>Edit cookbook</.button>
-    </.link>
-  </:actions>
+    <:subtitle>This is a cookbook record from your database.</:subtitle>
+    <:actions>
+      <.link href={~p"/cookbooks/#{@cookbook}/edit"}>
+        <.button>Edit cookbook</.button>
+      </.link>
+    </:actions>
 </.header>
 
 <.list>
-  <:item title="Name"><%= @cookbook.name %></:item>
-  <:item title="Recipe count"><%= @cookbook.recipe_count %></:item>
+  <:item title="Name">
+    <%= @cookbook.name %>
+  </:item>
+  <:item title="Recipe count">
+    <%= @cookbook.recipe_count %>
+  </:item>
 </.list>
 
 <.back navigate={~p"/cookbooks"}>Back to cookbooks</.back>
